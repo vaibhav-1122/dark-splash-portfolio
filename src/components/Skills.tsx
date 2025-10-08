@@ -8,14 +8,12 @@ import {
   SiJavascript,
   SiCplusplus,
   SiC,
-  SiJava,
   SiReact,
   SiRedux,
   SiHtml5,
   SiCss3,
   SiBootstrap,
   SiTailwindcss,
-  SiReactrouter,
   SiNodedotjs,
   SiExpress,
   SiSocketdotio,
@@ -25,20 +23,17 @@ import {
   SiGit,
   SiGithubactions,
   SiVercel,
-  SiRender,
   SiCloudinary,
   SiJsonwebtokens,
-  SiPassport,
-  SiWebrtc,
 } from "react-icons/si";
-import { Server, Lock, Workflow } from "lucide-react";
+import { Server, Lock, Workflow, Code2 } from "lucide-react";
 
 // Row 1: Languages & Core Frontend
 const row1Logos = [
   { node: <SiJavascript className="text-yellow-400" />, title: "JavaScript" },
   { node: <SiCplusplus className="text-blue-500" />, title: "C++" },
   { node: <SiC className="text-blue-600" />, title: "C" },
-  { node: <SiJava className="text-red-500" />, title: "Java" },
+  { node: <Code2 className="text-orange-500" />, title: "Java" },
   { node: <SiReact className="text-cyan-400" />, title: "React" },
   { node: <SiRedux className="text-purple-500" />, title: "Redux" },
   { node: <SiReact className="text-cyan-300" />, title: "React Hooks" },
@@ -46,7 +41,7 @@ const row1Logos = [
   { node: <SiCss3 className="text-blue-400" />, title: "CSS3" },
   { node: <SiBootstrap className="text-purple-600" />, title: "Bootstrap" },
   { node: <SiTailwindcss className="text-cyan-400" />, title: "Tailwind CSS" },
-  { node: <SiReactrouter className="text-red-400" />, title: "React Router" },
+  { node: <Workflow className="text-red-400" />, title: "React Router" },
 ];
 
 // Row 2: Backend & Databases
@@ -66,12 +61,12 @@ const row3Logos = [
   { node: <SiGit className="text-orange-600" />, title: "Git" },
   { node: <SiGithubactions className="text-blue-500" />, title: "GitHub Actions" },
   { node: <SiVercel className="text-white" />, title: "Vercel" },
-  { node: <SiRender className="text-purple-400" />, title: "Render" },
+  { node: <Server className="text-purple-400" />, title: "Render" },
   { node: <SiCloudinary className="text-blue-500" />, title: "Cloudinary" },
   { node: <SiJsonwebtokens className="text-pink-500" />, title: "JWT" },
-  { node: <SiPassport className="text-green-500" />, title: "OAuth 2.0 (Passport.js)" },
+  { node: <Lock className="text-green-500" />, title: "OAuth 2.0 (Passport.js)" },
   { node: <Lock className="text-yellow-400" />, title: "Bcrypt" },
-  { node: <SiWebrtc className="text-blue-400" />, title: "WebRTC" },
+  { node: <Workflow className="text-blue-400" />, title: "WebRTC" },
   { node: <Workflow className="text-purple-400" />, title: "WebSockets" },
 ];
 

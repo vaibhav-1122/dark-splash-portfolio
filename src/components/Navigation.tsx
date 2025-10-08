@@ -1,72 +1,68 @@
 "use client";
 
+import { Github } from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { useState, useEffect } from "react";
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ];
-
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"
-      }`}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-auto"
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="relative bg-background/80 backdrop-blur-lg rounded-full border border-white/10 px-4 py-2 shadow-2xl">
+        {/* Animated border effect */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-2xl font-bold bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent"
-          >
-            Portfolio
-          </motion.div>
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent)",
+            }}
+            animate={{
+              x: ["-200%", "200%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </div>
 
-          <motion.ul
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex gap-8"
+        <div className="relative flex items-center gap-2">
+          <a
+            href="#home"
+            className="px-3 py-1.5 text-xs font-medium text-foreground/80 hover:text-foreground transition-colors rounded-full hover:bg-white/5"
           >
-            {navItems.map((item, index) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
-              >
-                <Link
-                  href={item.href}
-                  className="text-foreground/70 hover:text-foreground transition-colors relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-500 group-hover:w-full transition-all duration-300" />
-                </Link>
-              </motion.li>
-            ))}
-          </motion.ul>
+            Home
+          </a>
+          <a
+            href="#tech-stack"
+            className="px-3 py-1.5 text-xs font-medium text-foreground/80 hover:text-foreground transition-colors rounded-full hover:bg-white/5"
+          >
+            Tech Stack
+          </a>
+          <a
+            href="#projects"
+            className="px-3 py-1.5 text-xs font-medium text-foreground/80 hover:text-foreground transition-colors rounded-full hover:bg-white/5"
+          >
+            Projects
+          </a>
+          <a
+            href="#experience"
+            className="px-3 py-1.5 text-xs font-medium text-foreground/80 hover:text-foreground transition-colors rounded-full hover:bg-white/5"
+          >
+            Experience
+          </a>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 text-foreground/80 hover:text-foreground transition-colors rounded-full hover:bg-white/5"
+          >
+            <Github className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </motion.nav>

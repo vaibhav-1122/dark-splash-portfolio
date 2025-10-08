@@ -2,9 +2,6 @@
 
 import { motion } from "framer-motion";
 import MeteorAnimation from "./MeteorAnimation";
-import dynamic from "next/dynamic";
-
-const Lanyard = dynamic(() => import("./Lanyard"), { ssr: false });
 
 export default function Hero() {
   return (
@@ -43,66 +40,53 @@ export default function Hero() {
       />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left side - Content */}
-          <div className="max-w-2xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold mb-6"
-            >
-              <span className="text-foreground/70">hi i'm </span>
-              <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-blue-400 bg-clip-text text-transparent">
-                Aman Verma
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-2xl md:text-3xl font-semibold mb-4 text-foreground"
-            >
-              Building the future one stack at a time.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-8"
-            >
-              <p className="text-lg text-purple-400 font-medium mb-2">
-                Full Stack Developer | Student
-              </p>
-              <p className="text-base text-foreground/70 max-w-2xl">
-                I craft full-stack applications, integrate AI solutions, and solve real-world problems.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <a
-                href="#contact"
-                className="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium hover:from-purple-500 hover:to-blue-500 transition-all hover:scale-105 shadow-lg hover:shadow-purple-500/50"
-              >
-                Contact Me
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right side - Lanyard */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="hidden lg:block h-[600px]"
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-bold mb-6"
           >
-            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+            <span className="text-foreground/70">hi i'm </span>
+            <span className="bg-gradient-to-r from-purple-400 via-purple-300 to-blue-400 bg-clip-text text-transparent">
+              Aman Verma
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-2xl md:text-3xl font-semibold mb-4 text-foreground"
+          >
+            Building the future one stack at a time.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-8"
+          >
+            <p className="text-lg text-purple-400 font-medium mb-2">
+              Full Stack Developer | Student
+            </p>
+            <p className="text-base text-foreground/70 max-w-2xl mx-auto">
+              I craft full-stack applications, integrate AI solutions, and solve real-world problems.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <a
+              href="#contact"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-medium hover:from-purple-500 hover:to-blue-500 transition-all hover:scale-105 shadow-lg hover:shadow-purple-500/50"
+            >
+              Contact Me
+            </a>
           </motion.div>
         </div>
       </div>

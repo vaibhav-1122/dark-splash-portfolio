@@ -2,70 +2,34 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
-import Link from "next/link";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with real-time inventory management and payment processing.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    slug: "ecommerce-platform",
-    github: "#",
+    title: "Travel Booking Platform",
+    description: "A comprehensive travel booking system with real-time availability, secure payment processing, and interactive destination guides. Features include flight and hotel search, booking management, and user reviews.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&h=800&fit=crop",
+    tags: ["React", "Node.js", "MongoDB", "Express", "Stripe", "Google Maps API"],
+    github: "https://github.com/amanverma-00/travel-booking",
     demo: "#",
-    color: "from-blue-500 to-purple-500",
   },
   {
-    title: "AI Content Generator",
-    description: "An AI-powered content creation tool using OpenAI API with beautiful UI and seamless UX.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
-    tags: ["React", "OpenAI", "Tailwind", "Node.js"],
-    slug: "ai-content-generator",
-    github: "#",
+    title: "Code Editor",
+    description: "A modern browser-based code editor with syntax highlighting, real-time collaboration, and multi-language support. Built with Monaco Editor and WebSocket for seamless team coding experience.",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop",
+    tags: ["React", "TypeScript", "Monaco Editor", "WebSocket", "Node.js"],
+    github: "https://github.com/amanverma-00/codeeditor",
     demo: "#",
-    color: "from-purple-500 to-pink-500",
   },
   {
-    title: "Social Media Dashboard",
-    description: "Analytics dashboard for social media management with real-time data visualization.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    tags: ["React", "D3.js", "Firebase", "Material-UI"],
-    slug: "social-dashboard",
-    github: "#",
+    title: "DSA MITRA",
+    description: "An intelligent Data Structures & Algorithms learning companion featuring interactive visualizations, problem-solving tracker, and personalized learning paths. Helps students master DSA concepts with real-time code execution.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=800&fit=crop",
+    tags: ["React", "Redux", "D3.js", "Firebase", "Material-UI", "Python"],
+    github: "https://github.com/amanverma-00/DSA-MITRA",
     demo: "#",
-    color: "from-green-500 to-blue-500",
-  },
-  {
-    title: "Fitness Tracking App",
-    description: "Mobile-first fitness application with workout plans, progress tracking, and nutrition guides.",
-    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800&h=600&fit=crop",
-    tags: ["React Native", "Redux", "MongoDB", "Express"],
-    slug: "fitness-app",
-    github: "#",
-    demo: "#",
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    title: "Real Estate Platform",
-    description: "Property listing and management system with advanced search filters and virtual tours.",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-    tags: ["Next.js", "Prisma", "PostgreSQL", "Mapbox"],
-    slug: "real-estate",
-    github: "#",
-    demo: "#",
-    color: "from-cyan-500 to-blue-500",
-  },
-  {
-    title: "Task Management Suite",
-    description: "Collaborative project management tool with kanban boards, time tracking, and team chat.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
-    tags: ["React", "Socket.io", "Node.js", "Redis"],
-    slug: "task-management",
-    github: "#",
-    demo: "#",
-    color: "from-indigo-500 to-purple-500",
   },
 ];
 
@@ -80,7 +44,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-pink-300 bg-clip-text text-transparent">
             Featured Projects
@@ -90,67 +54,91 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group relative"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
-              
-              <Link href={`/projects/${project.slug}`}>
-                <div className="relative bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 cursor-pointer">
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60" />
-                  </div>
+        <div className="h-[120vh]">
+          <ScrollStack
+            itemDistance={150}
+            itemScale={0.05}
+            itemStackDistance={40}
+            stackPosition="20%"
+            scaleEndPosition="10%"
+            baseScale={0.9}
+          >
+            {projects.map((project, index) => (
+              <ScrollStackItem key={index}>
+                <div className="grid md:grid-cols-2 gap-8 h-full">
+                  {/* Left Side: Content */}
+                  <div className="flex flex-col justify-between">
+                    {/* Top Section */}
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h3>
+                      <div className="w-full h-px bg-gradient-to-r from-primary/50 to-transparent mb-6" />
+                      
+                      <p className="text-foreground/70 text-lg mb-6 leading-relaxed">
+                        {project.description}
+                      </p>
 
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                    <p className="text-foreground/60 mb-4 line-clamp-2">{project.description}</p>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 text-xs bg-primary/10 text-primary border border-primary/20 rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      {/* Technology Tags */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-4 py-2 text-sm bg-primary/10 text-primary border border-primary/20 rounded-full hover:bg-primary/20 transition-colors"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
+                    {/* Bottom Buttons */}
                     <div className="flex gap-4">
                       <a
                         href={project.github}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-all hover:scale-105 font-semibold"
                       >
                         <Github className="w-5 h-5" />
                         <span>Code</span>
                       </a>
                       <a
                         href={project.demo}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors"
+                        className="flex items-center gap-2 px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all hover:scale-105 font-semibold"
                       >
                         <ExternalLink className="w-5 h-5" />
-                        <span>Demo</span>
+                        <span>Live Site</span>
                       </a>
                     </div>
                   </div>
+
+                  {/* Right Side: Project Image */}
+                  <div className="relative group">
+                    <div className="relative h-full min-h-[300px] md:min-h-[400px] rounded-2xl overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                      />
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      
+                      {/* Glow effect on hover */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-pink-500/20 blur-xl" />
+                      </div>
+
+                      {/* View Full Image hint */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-background/90 backdrop-blur-sm px-6 py-3 rounded-full border border-primary/50 text-sm font-semibold">
+                          View Full Image
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
         </div>
       </div>
     </section>

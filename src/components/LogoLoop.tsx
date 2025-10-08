@@ -206,6 +206,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     const [seqWidth, setSeqWidth] = useState<number>(0);
     const [copyCount, setCopyCount] = useState<number>(ANIMATION_CONFIG.MIN_COPIES);
     const [isHovered, setIsHovered] = useState<boolean>(false);
+    const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
     const targetVelocity = useMemo(() => {
       const magnitude = Math.abs(speed);
@@ -266,6 +267,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     const renderLogoItem = useCallback(
       (item: LogoItem, key: React.Key) => {
         const isNodeItem = 'node' in item;
+        const itemTitle = (item as any).title || (item as any).alt;
 
         const content = isNodeItem ? (
           <span
@@ -295,7 +297,6 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             width={(item as any).width}
             height={(item as any).height}
             alt={(item as any).alt ?? ''}
-            title={(item as any).title}
             loading="lazy"
             decoding="async"
             draggable={false}
@@ -328,17 +329,30 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         return (
           <li
             className={cx(
-              'flex-none mr-[var(--logoloop-gap)] text-[length:var(--logoloop-logoHeight)] leading-[1]',
+              'flex-none mr-[var(--logoloop-gap)] text-[length:var(--logoloop-logoHeight)] leading-[1] relative',
               scaleOnHover && 'overflow-visible group/item'
             )}
             key={key}
             role="listitem"
+            onMouseEnter={() => setHoveredItem(String(key))}
+            onMouseLeave={() => setHoveredItem(null)}
           >
             {inner}
+            {/* Tooltip */}
+            {itemTitle && hoveredItem === String(key) && (
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+                <div className="bg-foreground text-background px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap shadow-lg animate-in fade-in-0 zoom-in-95 duration-200">
+                  {itemTitle}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
+                    <div className="border-4 border-transparent border-t-foreground" />
+                  </div>
+                </div>
+              </div>
+            )}
           </li>
         );
       },
-      [scaleOnHover]
+      [scaleOnHover, hoveredItem]
     );
 
     const logoLists = useMemo(
